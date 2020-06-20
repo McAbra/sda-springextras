@@ -17,8 +17,12 @@ public class AdminProductController {
     private ProductService productService;
 
     @GetMapping
-    public ResponseEntity<List<ProductDto>> fetchAllProducts() {
-        List<ProductDto> productDtos = productService.fetchAllProducts();
+    public ResponseEntity<List<ProductDto>> fetchAllProducts(@RequestParam(required = false) String query,
+                                                             @RequestParam(required = false) Integer page,
+                                                             @RequestParam(required = false) Integer size,
+                                                             @RequestParam(required = false) String sortField,
+                                                             @RequestParam(required = false) String sortOrder) {
+        List<ProductDto> productDtos = productService.fetchAllProducts(query, page, size, sortField, sortOrder);
         return ResponseEntity.ok(productDtos);
     }
 
@@ -26,6 +30,4 @@ public class AdminProductController {
     public ResponseEntity<ProductDto> addProduct(@RequestBody ProductDto productDto) {
         return ResponseEntity.ok(productService.addProduct(productDto));
     }
-
-
 }
