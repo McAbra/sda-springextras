@@ -8,6 +8,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Base64;
 import java.util.Collection;
@@ -17,7 +18,7 @@ import java.util.Date;
 public class JwtTokenProvider {
     @Value("${security.jwt.token.secretkey:123}")
     private String secretKey;
-    @Value("${security.jwt.token.expiretime:60000}")
+    @Value("${security.jwt.token.expiretime:600000}")
     private Long expireTime;
     @Autowired
     private UserDetailsService jwtUserDetailsService;
@@ -50,7 +51,7 @@ public class JwtTokenProvider {
             return false;
         }
     }
-
+    @Transactional
     public Authentication getAuthentication(String token) {
         String subject = Jwts.parser().setSigningKey(Base64.getEncoder().encodeToString(secretKey.getBytes()))
                 .parseClaimsJws(token).getBody().getSubject();
