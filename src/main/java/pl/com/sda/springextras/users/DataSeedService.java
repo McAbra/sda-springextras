@@ -6,9 +6,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import pl.com.sda.springextras.products.Product;
 import pl.com.sda.springextras.products.ProductType;
-import pl.com.sda.springextras.repository.ProductRepository;
-import pl.com.sda.springextras.repository.RoleRepository;
-import pl.com.sda.springextras.repository.UserRepository;
+import pl.com.sda.springextras.products.ProductRepository;
 
 import java.math.BigDecimal;
 

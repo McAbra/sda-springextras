@@ -1,11 +1,11 @@
-package pl.com.sda.springextras.controller;
+package pl.com.sda.springextras.products;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import pl.com.sda.springextras.products.ProductDto;
-import pl.com.sda.springextras.service.ProductService;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -28,6 +28,17 @@ public class AdminProductController {
 
     @PostMapping
     public ResponseEntity<ProductDto> addProduct(@RequestBody ProductDto productDto) {
-        return ResponseEntity.ok(productService.addProduct(productDto));
+        return ResponseEntity.status(201).body(productService.addProduct(productDto));
+    }
+
+    @PutMapping
+    public ResponseEntity<ProductDto> updateProduct(@Valid @RequestBody ProductDto productDto) {
+        return ResponseEntity.ok(productService.updateProduct(productDto));
+    }
+
+    @DeleteMapping("/{productId}")
+    public ResponseEntity removeProduct(@PathVariable Long productId) {
+        productService.removeProduct(productId);
+        return ResponseEntity.status(204).build();
     }
 }

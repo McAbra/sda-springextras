@@ -1,4 +1,4 @@
-package pl.com.sda.springextras.mapper;
+package pl.com.sda.springextras.products;
 
 import org.springframework.stereotype.Service;
 import pl.com.sda.springextras.products.Product;
@@ -21,5 +21,13 @@ public class ProductMapper {
         return new Product(productDto.getId(), productDto.getProductName(),
                 productDto.getUrl(), productDto.getPrice(),
                 productDto.getProductType());
+    }
+
+    public Product updateProduct(Product product, ProductDto productDto) {
+        product.setUrl(productDto.getUrl());
+        product.setProductType(productDto.getProductType());
+        product.setProductName(productDto.getProductName());
+        product.setPrice(productDto.getPrice());
+        return product;
     }
 }

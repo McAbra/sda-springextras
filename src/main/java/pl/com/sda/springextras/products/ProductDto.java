@@ -2,6 +2,7 @@ package pl.com.sda.springextras.products;
 
 import lombok.*;
 
+import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 
 @Getter
@@ -10,7 +11,8 @@ import java.math.BigDecimal;
 @Builder
 @AllArgsConstructor
 public class ProductDto {
-    private Integer id;
+    @NotNull
+    private Long id;
     private String productName;
     private String url;
     private BigDecimal price;
